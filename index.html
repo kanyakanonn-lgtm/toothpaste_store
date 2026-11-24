@@ -1,1 +1,73 @@
 
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toothpaste Store</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f5faf7;color:#234}
+header{background:#16866b;color:white;padding:25px;text-align:center}
+h1{margin:0}
+.container{max-width:900px;margin:30px auto;padding:15px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:white;padding:22px;border-radius:15px;text-align:center;box-shadow:0 3px 12px #ddd}
+.photo{font-size:65px}
+button{background:#16866b;color:white;border:0;padding:12px 20px;border-radius:8px;cursor:pointer}
+.cart{background:white;padding:20px;margin-top:25px;border-radius:12px}
+</style>
+</head>
+<body>
+<header>
+<h1>🦷 Toothpaste Store</h1>
+<p>ร้านขายยาสีฟันออนไลน์</p>
+</header>
+<div class="container">
+<h2>สินค้าแนะนำ</h2>
+<div class="products">
+<div class="card">
+<div class="photo">🌿</div>
+<h3>ยาสีฟันสมุนไพร</h3>
+<p>สูตรสมุนไพร ดูแลช่องปาก</p>
+<p>ราคา 89 บาท</p>
+<button onclick="add('ยาสีฟันสมุนไพร',89)">เพิ่มลงตะกร้า</button>
+</div>
+<div class="card">
+<div class="photo">✨</div>
+<h3>ยาสีฟันไวท์เทนนิ่ง</h3>
+<p>สูตรฟันขาว</p>
+<p>ราคา 129 บาท</p>
+<button onclick="add('ยาสีฟันไวท์เทนนิ่ง',129)">เพิ่มลงตะกร้า</button>
+</div>
+</div>
+<div class="cart">
+<h2>🛒 ตะกร้าสินค้า</h2>
+<div id="items">ยังไม่มีสินค้า</div>
+<p id="total">รวม 0 บาท</p>
+<h3>ข้อมูลจัดส่ง</h3>
+<input id="name" placeholder="ชื่อผู้รับ"><br><br>
+<input id="address" placeholder="ที่อยู่จัดส่ง"><br><br>
+<input id="phone" placeholder="เบอร์โทรศัพท์"><br><br>
+<button onclick="checkout()">ยืนยันคำสั่งซื้อ</button>
+<p id="result"></p>
+</div>
+</div>
+<script>
+let cart=[];
+function add(name,price){
+cart.push({name,price});
+show();
+}
+function show(){
+document.getElementById('items').innerHTML=cart.map(x=>x.name+' - '+x.price+' บาท').join('<br>')||'ยังไม่มีสินค้า';
+document.getElementById('total').innerText='รวม '+cart.reduce((s,x)=>s+x.price,0)+' บาท';
+}
+function checkout(){
+if(!cart.length){alert('กรุณาเลือกสินค้าก่อน');return;}
+if(!name.value||!address.value||!phone.value){alert('กรุณากรอกข้อมูลจัดส่ง');return;}
+document.getElementById('result').innerText='รับคำสั่งซื้อแล้ว ขอบคุณค่ะ';
+}
+</script>
+</body>
+</html>
+
